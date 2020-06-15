@@ -1,0 +1,51 @@
+{{#if isLoggedIn}}
+
+<div class="container">
+  <h1>Project Details</h1>
+  
+  <select name="sortBy" id="sortBy">
+    <option value="0_asc" selected="selected">Recent projects</option>
+    <option value="0_desc">Category name (Asc)</option>
+    <option value="pe-sku-column_asc">User name(Asc)</option>
+    <option value="pe-sku-column_asc">Project title(Asc)</option>
+  </select>
+  <table class="table" id="myTable" data-page-length='2'>
+    <thead>
+      <tr>
+        <th scope="col">Project Title</th>
+        <th scope="col">User Name</th>
+        <th scope="col">Category Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each data}}
+      <tr>
+        <td>{{this.project_title}}</td>
+        <td>{{this.user_name}}</td>
+        <td>{{this.category_name}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+{{else}}
+<div> User should login! </div>
+{{/if}}
+<script>
+
+  $(document).ready(function () {
+    var sort = $('#myTable').DataTable({
+      searching: false,
+      dom: 'bfrtip',
+
+    });
+     $("#sortBy").change(function () {
+
+        sort.order([1, 'asc']).draw();
+    })
+  });
+
+   
+</script>
+
+<a href="https://bij8t.sse.codesandbox.io/admin/logout">logout</a>
